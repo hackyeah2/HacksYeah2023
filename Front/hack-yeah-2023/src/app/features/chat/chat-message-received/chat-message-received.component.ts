@@ -13,7 +13,7 @@ import { ChartsDialogComponent } from "../../charts/charts-dialog/charts-dialog.
 })
   export class ChatMessageReceivedComponent {
 
-    @Input() receivedMessage!: string | undefined;
+    @Input() receivedMessage!: string;
 
     constructor(public dialog: MatDialog) {}
 
