@@ -7,13 +7,14 @@ import { ChartsDialogComponent } from "../../charts/charts-dialog/charts-dialog.
 import { QuestionResponse } from "../models/question-response";
 import { ChatMessage } from "../models/chat-message";
 import { Data } from "../models/data";
+import { LineChartComponent } from "../../charts/line-chart/line-chart.component";
 
 @Component({
     selector: 'app-chat-message-received',
     templateUrl: './chat-message-received.component.html',
     styleUrls: ['./chat-message-received.component.scss'],
     standalone: true,
-    imports: [MatButtonModule, MatDialogModule, CommonModule]
+    imports: [MatButtonModule, MatDialogModule, CommonModule, LineChartComponent]
 })
   export class ChatMessageReceivedComponent {
 
