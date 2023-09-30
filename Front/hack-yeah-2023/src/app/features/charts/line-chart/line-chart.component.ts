@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { Data } from '../../chat/models/data';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,28 +10,17 @@ import Chart from 'chart.js/auto';
 })
 export class LineChartComponent {
   chart: any;
-
-  createChart(){
+  @Input() data!: Data;
   
+  createChart(){
+
+
+    console.log(this.data);
     this.chart = new Chart("MyLineChart", {
       type: 'line',
       data: {
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	       datasets: [
-          {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92',
-								 '574', '573', '576'],
-            backgroundColor: 'blue'
-          },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17',
-									 '777', '538', '541'],
-            backgroundColor: 'limegreen'
-          }  
-        ]
+        labels: this.data.labels, 
+	      datasets: []
       },
       options: {
         responsive: true,
@@ -46,6 +36,19 @@ export class LineChartComponent {
       }
       
     });
+    let datasetArray = [];
+    for (let i =0; i<this.data.datasets.length; i++){
+      datasetArray.push(
+        {
+          label: this.data.datasets[i].label,
+          data: this.data.datasets[i].data
+        }
+      )
+    }
+    console.log(datasetArray)
+    this.chart.data.datasets = datasetArray;
+    this.chart.update();
+
   }
 
   ngOnInit(){

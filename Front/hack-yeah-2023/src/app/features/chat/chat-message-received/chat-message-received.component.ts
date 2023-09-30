@@ -3,6 +3,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import { CommonModule } from "@angular/common";
 import { ChartsDialogComponent } from "../../charts/charts-dialog/charts-dialog.component";
+import { QuestionResponse } from "../models/question-response";
+import { ChatMessage } from "../models/chat-message";
+import { Data } from "../models/data";
 
 @Component({
     selector: 'app-chat-message-received',
@@ -11,9 +14,11 @@ import { ChartsDialogComponent } from "../../charts/charts-dialog/charts-dialog.
     standalone: true,
     imports: [MatButtonModule, MatDialogModule, CommonModule]
 })
-  export class ChatMessageReceivedComponent implements AfterViewInit {
+  export class ChatMessageReceivedComponent {
 
-    @Input() receivedMessage!: string;
+    @Input() answer!: string;
+    @Input() chartData!: Data;
+    @Input() showChart!: boolean;
 
     private contentPlaceholder!: ElementRef;
 
@@ -29,16 +34,13 @@ import { ChartsDialogComponent } from "../../charts/charts-dialog/charts-dialog.
     openChartsDialog(): void {
       this.dialog.open(ChartsDialogComponent, {
           height: '200px',
-          width: '500px'
+          width: '500px',
+          data: {chartData: this.chartData!} 
       });
   }
 
-  ngAfterViewInit(): void {
-    
-  }
-
   private startTyping(): void {
-    const word = this.receivedMessage.split("");
+    const word = this.answer.split("");
     const continueTyping = () => {
       if (word.length > 0) {
         this.contentPlaceholder.nativeElement.innerHTML += word.shift();

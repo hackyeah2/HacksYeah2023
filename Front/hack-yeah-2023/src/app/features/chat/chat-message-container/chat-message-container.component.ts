@@ -36,8 +36,11 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
 
       this._receiveMessageSub = this.chatCommunicationService.receivedMessage$.subscribe(msg => {
          let message = this.chatMessages[this.chatMessages.length - 1];
+         console.log(message);
          if(message) {
-          message.answer = msg;
+          message.answer = msg?.answer;
+          message.chartData = msg?.chartData;
+          message.showChart = msg?.showChart;
          }
 
          this.delayNotification.emit(false);

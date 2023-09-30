@@ -25,7 +25,7 @@ import { QuestionRequest } from "./models/question-request";
       this.chatService.sendMessage(<QuestionRequest> {
         question: message
       }).subscribe(response => {
-        this.chatCommunicationService.addReceivedMessage(response.answer);
+        this.chatCommunicationService.addReceivedMessage(response);
       });
     }
 

@@ -1,4 +1,4 @@
 <div class="flex flex-col mt-5" *ngFor="let message of chatMessages">
     <app-chat-message-sent [sentMessage]="message.question"></app-chat-message-sent>
-    <app-chat-message-received [receivedMessage]="message.answer"></app-chat-message-received>
+    <app-chat-message-received [answer]="message.answer" [chartData]="message.chartData" [showChart]="message.showChart"></app-chat-message-received>
 </div>
