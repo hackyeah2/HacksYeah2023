@@ -15,13 +15,13 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
   })
   export class ChatInputComponent implements OnInit {
 
-    private _message!: string | undefined;
+    private _message!: string;
 
     isDisabled = true;
     showQestionTiles = true;
     messageFormControl = new FormControl('');
 
-    @Output() messageNotification: EventEmitter<string | undefined> = new EventEmitter();
+    @Output() messageNotification: EventEmitter<string> = new EventEmitter();
     @Input() delay!: boolean;
 
     ngOnInit(): void {
@@ -33,7 +33,7 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
       }
 
       this.messageFormControl.valueChanges.subscribe(val => {
-        this._message = val?.trim();
+        this._message = val?.trim() ?? '';
         if(this._message && this._message.length) {
           this.isDisabled = false;
         } else {

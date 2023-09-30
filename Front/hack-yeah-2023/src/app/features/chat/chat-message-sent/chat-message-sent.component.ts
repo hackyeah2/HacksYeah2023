@@ -10,6 +10,6 @@ import { CommonModule } from "@angular/common";
 })
   export class ChatMessageSentComponent {
 
-    @Input() sentMessage!: string | undefined;
+    @Input() sentMessage!: string;
     
   }
