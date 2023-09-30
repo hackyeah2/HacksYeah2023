@@ -2,3 +2,6 @@
     <app-chat-message-container (delayNotification)="handleDelayNotification($event)"></app-chat-message-container>
     <app-chat-input [delay]="delay" (messageNotification)="handleMessageNotification($event)"></app-chat-input>
 </div>
+<ngx-spinner size="medium" type="ball-scale-multiple" [fullScreen]="true">
+    <p class="text-white">Pobieranie odpowiedzi...</p>
+</ngx-spinner>

@@ -7,12 +7,14 @@ import { APP_ROUTES } from "./app/app.routing";
 import { HttpClientModule } from "@angular/common/http";
 import { ChatService } from "./app/features/chat/services/chat.service";
 import { ChatCommunicationService } from "./app/features/chat/services/chat-communication.service";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: ChatService, useClass: ChatService },
     { provide: ChatCommunicationService, useClass: ChatCommunicationService },
     importProvidersFrom(RouterModule.forRoot(APP_ROUTES)),
-    importProvidersFrom(HttpClientModule)
+    importProvidersFrom(HttpClientModule),
+    importProvidersFrom(BrowserAnimationsModule)
   ]
 });

@@ -4,24 +4,27 @@ import { ChatMessageContainerComponent } from "./chat-message-container/chat-mes
 import { ChatCommunicationService } from "./services/chat-communication.service";
 import { ChatService } from "./services/chat.service";
 import { QuestionRequest } from "./models/question-request";
+import { NgxSpinnerService, NgxSpinnerModule} from "ngx-spinner";
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.scss'],
     standalone: true,
-    imports: [ChatInputComponent, ChatMessageContainerComponent]
+    imports: [ChatInputComponent, ChatMessageContainerComponent, NgxSpinnerModule]
 })
   export class ChatComponent {
 
     delay! : boolean;
 
     constructor(private chatCommunicationService: ChatCommunicationService,
-       private chatService: ChatService) { }
+       private chatService: ChatService,
+       private spinnerService: NgxSpinnerService) { }
 
     handleMessageNotification(message: string) {
       this.chatCommunicationService.addSentMessage(message);
       this.chatCommunicationService.setMessageTypingDisabled(true);
+      this.spinnerService.show();
 
       this.chatService.sendMessage(<QuestionRequest> {
         question: message

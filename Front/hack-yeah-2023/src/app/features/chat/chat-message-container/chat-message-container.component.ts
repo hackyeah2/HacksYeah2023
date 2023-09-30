@@ -6,6 +6,7 @@ import { ChatMessage } from "../models/chat-message";
 import { Subscription } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question-tiles.component";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
     selector: 'app-chat-message-container',
@@ -23,7 +24,8 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
 
     @Output() delayNotification: EventEmitter<boolean> = new EventEmitter();
 
-    constructor(private chatCommunicationService: ChatCommunicationService) { }
+    constructor(private chatCommunicationService: ChatCommunicationService,
+      private spinnerService: NgxSpinnerService) { }
 
     ngOnInit(): void {
       this._addMessageSub = this.chatCommunicationService.sentMessage$.subscribe(msg => {
@@ -43,6 +45,7 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
           message.showChart = msg?.showChart;
          }
 
+         this.spinnerService.hide();
          this.delayNotification.emit(false);
       })
     }
