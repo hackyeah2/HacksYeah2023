@@ -1,8 +1,10 @@
+import json
+from pandas import DataFrame
 from data.assets.resource import Resource
 
 
 class Answer:
-    def __init__(self, answer: str, resourses: [Resource], sessionId: str):
+    def __init__(self, answer: str, data: DataFrame, sessionId: str):
         self.answer: str = answer
-        self.resourses: [Resource] = resourses
+        self.data: any = json.loads(data.to_json(orient="columns"))
         self.sessionId: str = sessionId
