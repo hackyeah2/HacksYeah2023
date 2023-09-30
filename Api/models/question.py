@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
-class question(BaseModel):
+
+class Question(BaseModel):
     question: str
-    sessionId : str
+    sessionId: str
