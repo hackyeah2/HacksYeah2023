@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["gunicorn", "main:app", "--bind=0.0.0.0:80"]
+CMD ["gunicorn", "main:app", "--bind=0.0.0.0:80", "-k uvicorn.workers.UvicornWorker"]
