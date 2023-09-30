@@ -1,0 +1,4 @@
+<div class="max-w-[960px] h-full my-0 mx-auto bg-white flex flex-col justify-between" >
+    <app-chat-message-container (delayNotification)="handleDelayNotification($event)"></app-chat-message-container>
+    <app-chat-input [delay]="delay" (messageNotification)="handleMessageNotification($event)"></app-chat-input>
+</div>
