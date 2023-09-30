@@ -5,13 +5,14 @@ import { ChatCommunicationService } from "../services/chat-communication.service
 import { ChatMessage } from "../models/chat-message";
 import { Subscription } from "rxjs";
 import { CommonModule } from "@angular/common";
+import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question-tiles.component";
 
 @Component({
     selector: 'app-chat-message-container',
     templateUrl: './chat-message-container.component.html',
     styleUrls: ['./chat-message-container.component.scss'],
     standalone: true,
-    imports: [ChatMessageSentComponent, ChatMessageReceivedComponent, CommonModule]
+    imports: [ChatMessageSentComponent, ChatMessageReceivedComponent, CommonModule, ChatQuestionTilesComponent]
 })
   export class ChatMessageContainerComponent implements OnInit, OnDestroy {
 

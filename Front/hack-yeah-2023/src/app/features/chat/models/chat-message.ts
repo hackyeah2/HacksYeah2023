@@ -1,4 +1,4 @@
 export interface ChatMessage {
-    question: string | undefined;
-    answer: string | undefined;
+    question: string;
+    answer: string;
 }

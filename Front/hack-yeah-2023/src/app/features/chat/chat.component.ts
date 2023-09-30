@@ -19,7 +19,7 @@ import { QuestionRequest } from "./models/question-request";
     constructor(private chatCommunicationService: ChatCommunicationService,
        private chatService: ChatService) { }
 
-    handleMessageNotification(message: string | undefined) {
+    handleMessageNotification(message: string) {
       this.chatCommunicationService.addSentMessage(message);
 
       this.chatService.sendMessage(<QuestionRequest> {

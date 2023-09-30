@@ -1,11 +1,15 @@
+<div *ngIf="showQestionTiles">
+    <app-chat-question-tiles></app-chat-question-tiles>
+</div>
 <div class="bottom-0 w-full m-2 flex flex-row justify-center items-center">
     <div class="basis-[96%]">
+
         <input type="text"
         placeholder="Zadaj pytanie..."
-        class="border-solid border-2 border-grey-500 rounded-2xl py-2 px-2 w-full"
+        class="border-solid border-[1.5px] border-grey-500 rounded-2xl py-2 px-2 w-full shadow-inner"
         [formControl]="messageFormControl"
-        style="border-color: #d9d9d9"
         (keyup.enter)="sendMessageNotification()">
+
     </div>
     <div class="basis-[4%] py-2 px-2 w-full">
         <button [disabled]="isDisabled" (click)="sendMessageNotification()">
