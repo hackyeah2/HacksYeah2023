@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from "@angular/core";
 import { ChatMessageSentComponent } from "../chat-message-sent/chat-message-sent.component";
 import { ChatMessageReceivedComponent } from "../chat-message-received/chat-message-received.component";
 import { ChatCommunicationService } from "../services/chat-communication.service";
@@ -20,6 +20,8 @@ import { CommonModule } from "@angular/common";
     private _addMessageSub!: Subscription;
     private _receiveMessageSub!: Subscription;
 
+    @Output() delayNotification: EventEmitter<boolean> = new EventEmitter();
+
     constructor(private chatCommunicationService: ChatCommunicationService) { }
 
     ngOnInit(): void {
@@ -27,6 +29,8 @@ import { CommonModule } from "@angular/common";
         this.chatMessages.push(<ChatMessage> {
           question: msg
         })
+
+        this.delayNotification.emit(true);
       })
 
       this._receiveMessageSub = this.chatCommunicationService.receivedMessage$.subscribe(msg => {
@@ -34,6 +38,8 @@ import { CommonModule } from "@angular/common";
          if(message) {
           message.answer = msg;
          }
+
+         this.delayNotification.emit(false);
       })
     }
 

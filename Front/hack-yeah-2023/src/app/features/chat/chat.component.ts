@@ -14,6 +14,8 @@ import { QuestionRequest } from "./models/question-request";
 })
   export class ChatComponent {
 
+    delay! : boolean;
+
     constructor(private chatCommunicationService: ChatCommunicationService,
        private chatService: ChatService) { }
 
@@ -25,5 +27,9 @@ import { QuestionRequest } from "./models/question-request";
       }).subscribe(response => {
         this.chatCommunicationService.addReceivedMessage(response.answer);
       });
+    }
+
+    handleDelayNotification(message: boolean){
+      this.delay = message;
     }
   }
