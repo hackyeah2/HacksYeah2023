@@ -39,12 +39,14 @@ def search(type: AssetType, query: str):
             "uri": ZILLIZ_CLOUD_URI,
             "token": ZILLIZ_CLOUD_API_KEY,
             "secure": True,
+            
         }
     )
 
     founds = store.similarity_search(
         query,
         filter={"type": type.value},
+        timeout=30
     )
 
     return [Resource(document.page_content, source=document.metadata["source"]) for document in founds]
