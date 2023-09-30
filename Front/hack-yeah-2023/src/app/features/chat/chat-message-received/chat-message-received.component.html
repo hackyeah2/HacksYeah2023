@@ -1,5 +1,10 @@
 <div *ngIf="receivedMessage" class="flex justify-start mb-3">
     <div class="bg-light-stone text-black ml-2 py-3 px-3 max-w-[75%] rounded-2xl">
         {{receivedMessage}}
+        <div class="mt-2">
+            <button mat-button (click)="openChartsDialog()">
+                Pokaż wykres
+            </button>
+        </div>
     </div>
 </div>
