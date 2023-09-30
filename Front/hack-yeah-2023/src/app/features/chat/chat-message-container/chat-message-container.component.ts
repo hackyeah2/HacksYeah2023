@@ -30,7 +30,7 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
         this.chatMessages.push(<ChatMessage> {
           question: msg
         })
-
+        
         this.delayNotification.emit(true);
       })
 

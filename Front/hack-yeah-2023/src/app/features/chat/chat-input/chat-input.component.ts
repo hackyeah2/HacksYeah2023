@@ -1,3 +1,4 @@
+import { ChatCommunicationService } from '../../chat/services/chat-communication.service';
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -18,20 +19,15 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
     private _message!: string;
 
     isDisabled = true;
-    showQestionTiles = true;
+    showQuestionTiles = true;
     messageFormControl = new FormControl('');
 
     @Output() messageNotification: EventEmitter<string> = new EventEmitter();
     @Input() delay!: boolean;
 
-    ngOnInit(): void {
-      if (this.delay){
-        this.messageFormControl.disable();
-      }
-      else {
-        this.messageFormControl.enable();
-      }
+    constructor(private chatCommunicationService: ChatCommunicationService) {}
 
+    ngOnInit(): void {
       this.messageFormControl.valueChanges.subscribe(val => {
         this._message = val?.trim() ?? '';
         if(this._message && this._message.length) {
@@ -40,10 +36,14 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
           this.isDisabled = true;
         }
       });
+
+      this.chatCommunicationService.messageTypingDisabled$.subscribe(disabled => {
+        disabled ? this.messageFormControl.disable() : this.messageFormControl.enable();
+      });
     }
 
     sendMessageNotification() {
-      this.showQestionTiles = false;
+      this.showQuestionTiles = false;
       this.messageNotification.emit(this._message);
       this.messageFormControl.setValue('');
     }

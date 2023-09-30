@@ -1,3 +1,4 @@
+import { ChatCommunicationService } from '../../chat/services/chat-communication.service';
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
@@ -29,7 +30,7 @@ import { Data } from "../models/data";
        }
       }
 
-    constructor(public dialog: MatDialog) {}
+    constructor(public dialog: MatDialog, private chatCommunicationService: ChatCommunicationService) {}
 
     openChartsDialog(): void {
       this.dialog.open(ChartsDialogComponent, {
@@ -44,10 +45,12 @@ import { Data } from "../models/data";
     const continueTyping = () => {
       if (word.length > 0) {
         this.contentPlaceholder.nativeElement.innerHTML += word.shift();
+      } else {
+        this.chatCommunicationService.setMessageTypingDisabled(false);
+        return;
       }
-      setTimeout(continueTyping, 50);
+      setTimeout(continueTyping, 20);
     };
     continueTyping();
   }
-
   }

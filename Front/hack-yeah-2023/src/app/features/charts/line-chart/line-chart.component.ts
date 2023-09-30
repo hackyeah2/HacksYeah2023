@@ -30,7 +30,7 @@ export class LineChartComponent {
           },
           title: {
             display: true,
-            text: 'Chart.js Floating Line Chart'
+            text: this.data.title
           }
         }
       }

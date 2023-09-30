@@ -21,6 +21,7 @@ import { QuestionRequest } from "./models/question-request";
 
     handleMessageNotification(message: string) {
       this.chatCommunicationService.addSentMessage(message);
+      this.chatCommunicationService.setMessageTypingDisabled(true);
 
       this.chatService.sendMessage(<QuestionRequest> {
         question: message
