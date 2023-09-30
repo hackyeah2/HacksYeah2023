@@ -1,11 +1,9 @@
 import os
-import chromadb
 import dotenv
 from langchain.schema import Document
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Milvus
 from langchain.schema import Document
-from langchain.retrievers.self_query.base import SelfQueryRetriever
 
 from data.assets.asset import AssetType
 from data.assets.resource import Resource
@@ -16,8 +14,7 @@ ZILLIZ_CLOUD_URI = os.getenv("ZILLIZ_CLOUD_URI")
 ZILLIZ_CLOUD_API_KEY = os.getenv("ZILLIZ_CLOUD_API_KEY")
 
 
-persistent_client = chromadb.PersistentClient()
-embeddings = OpenAIEmbeddings()
+embeddings = HuggingFaceEmbeddings()
 
 
 def generate(type: AssetType, resources: [Resource]):
