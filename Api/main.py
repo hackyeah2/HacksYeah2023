@@ -1,11 +1,20 @@
+from fastapi.concurrency import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
+from seed import dispose, seed
 from logs.logs_wrapper import *
 from models.question import Question
 from datetime import datetime
 import chat.qa as qa
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    seed()
+    yield
+    dispose()
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.post("/")

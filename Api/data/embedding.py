@@ -1,8 +1,9 @@
 import os
+import chromadb
 import dotenv
 from langchain.schema import Document
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Milvus
+from langchain.vectorstores import Chroma
 from langchain.schema import Document
 
 from data.assets.asset import AssetType
@@ -10,43 +11,32 @@ from data.assets.resource import Resource
 
 dotenv.load_dotenv()
 
-ZILLIZ_CLOUD_URI = os.getenv("ZILLIZ_CLOUD_URI")
-ZILLIZ_CLOUD_API_KEY = os.getenv("ZILLIZ_CLOUD_API_KEY")
-
-
+persistent_client = chromadb.PersistentClient()
 embeddings = HuggingFaceEmbeddings()
+
+db = Chroma(embedding_function=embeddings, client=persistent_client)
 
 
 def generate(type: AssetType, resources: [Resource]):
     documents = [Document(page_content=resource.name, metadata={"source": resource.source, "type": type.value})
                  for resource in resources]
 
-    Milvus.from_documents(
+    db.from_documents(
         documents,
         embeddings,
-        connection_args={
-            "uri": ZILLIZ_CLOUD_URI,
-            "token": ZILLIZ_CLOUD_API_KEY,
-            "secure": True,
-        }
+        client=persistent_client,
     )
 
 
 def search(type: AssetType, query: str):
-    store = Milvus(
-        embeddings,
-        connection_args={
-            "uri": ZILLIZ_CLOUD_URI,
-            "token": ZILLIZ_CLOUD_API_KEY,
-            "secure": True,
-            
-        }
-    )
-
-    founds = store.similarity_search(
+    founds = db.similarity_search(
         query,
         filter={"type": type.value},
         timeout=30
     )
 
     return [Resource(document.page_content, source=document.metadata["source"]) for document in founds]
+
+
+def clear():
+    persistent_client.reset()

@@ -6,5 +6,6 @@ from data.assets.resource import Resource
 class Answer:
     def __init__(self, answer: str, data: DataFrame, sessionId: str):
         self.answer: str = answer
-        self.data: any = json.loads(data.to_json(orient="columns"))
+        self.data: any = json.loads(data.to_json(
+            orient="columns")) if data is not None else None
         self.sessionId: str = sessionId
