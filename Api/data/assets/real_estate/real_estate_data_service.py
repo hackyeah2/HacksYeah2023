@@ -1,7 +1,7 @@
 import os
 from data.assets.resource import Resource
 
-PATH = "Api/static/resources/real_estate"
+PATH = "/static/resources/real_estate"
 
 
 def fetch() -> [Resource]:
