@@ -32,7 +32,8 @@ def search(type: AssetType, query: str):
     founds = db.similarity_search(
         query,
         filter={"type": type.value},
-        timeout=30
+        timeout=30,
+        verbose=True
     )
 
     return [Resource(document.page_content, source=document.metadata["source"]) for document in founds]

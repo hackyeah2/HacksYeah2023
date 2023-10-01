@@ -1,4 +1,5 @@
 import os
+from chat.formating import reformat
 from chat.violtation import check_for_violation
 from data.assets.resource import Resource
 from data.assets.asset import AssetType
@@ -17,13 +18,15 @@ def answer(question: Question):
     if not is_valid:
         return Answer(violation_message, None, question.sessionId)
 
-    related_resources = embedding.search(type, question.question)
+    reformated_query = reformat(question)
+
+    related_resources = embedding.search(type, reformated_query)
     top_resource = get_top_resource(question, related_resources)
 
     if top_resource is None:
         return Answer('No resources found', None, question.sessionId)
 
-    answer = answer_question_based_on_resource(question, top_resource)
+    answer = answer_question_based_on_resource(reformated_query, top_resource)
 
     return Answer(answer, top_resource, question.sessionId)
 
@@ -36,7 +39,7 @@ def get_top_resource(question: Question, resources: [Resource]):
     return top_resource
 
 
-def answer_question_based_on_resource(question: Question, resource: Resource):
+def answer_question_based_on_resource(question: str, resource: Resource):
     resource_absolute_path = os.path.join(os.getcwd(), resource.source)
 
     agent = create_csv_agent(
@@ -47,4 +50,4 @@ def answer_question_based_on_resource(question: Question, resource: Resource):
         pandas_kwargs={'delimiter': ';'}
     )
 
-    return agent.run(question.question)
+    return agent.run(question)

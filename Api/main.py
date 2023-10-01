@@ -19,12 +19,15 @@ app = FastAPI(lifespan=lifespan)
 
 @app.post("/")
 def post_question(question: Question):
+    result = qa.answer(question)
+    
     log(Log(timestamp=datetime.now(),
             userType='user',
             sessionId=question.sessionId,
-            message=question.question))
+            message=question.question,response = result))
+    
+    return result
 
-    return qa.answer(question)
 
 
 if __name__ == "__main__":
