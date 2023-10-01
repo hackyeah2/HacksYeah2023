@@ -8,5 +8,5 @@ def seed():
     embedding.generate(AssetType.REAL_ESTATE, real_estate_data)
 
 
-if __name__ == "__main__":
-    seed()
+def dispose():
+    embedding.clear()
