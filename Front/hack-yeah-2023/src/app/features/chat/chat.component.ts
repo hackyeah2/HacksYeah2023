@@ -5,6 +5,8 @@ import { ChatCommunicationService } from "./services/chat-communication.service"
 import { ChatService } from "./services/chat.service";
 import { QuestionRequest } from "./models/question-request";
 import { NgxSpinnerService, NgxSpinnerModule} from "ngx-spinner";
+import { catchError, of, timeout } from "rxjs";
+import { QuestionResponse } from "./models/question-response";
 
 @Component({
     selector: 'app-chat',
@@ -28,7 +30,16 @@ import { NgxSpinnerService, NgxSpinnerModule} from "ngx-spinner";
 
       this.chatService.sendMessage(<QuestionRequest> {
         question: message
-      }).subscribe(response => {
+      })
+      .pipe(timeout(60000),
+        catchError(() => {
+          return of(<QuestionResponse> <unknown>{
+            answer: 'Nie udało się pobrać danych.',
+            showChart: false
+          })
+        })
+      )
+      .subscribe(response => {
         this.chatCommunicationService.addReceivedMessage(response);
       });
     }
