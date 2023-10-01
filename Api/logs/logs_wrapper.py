@@ -8,4 +8,4 @@ def log(log: Log):
 
     with open(absolute_path, 'a') as f:
         f.write(
-            "\n{" + f'"datetime":"{log.timestamp}","sessionId":"{log.sessionId}","message":"{log.message}"' + "}")
+            "\n{" + f'"datetime":"{log.timestamp}","sessionId":"{log.sessionId}","message":"{log.message}","response":"{log.response}"' + "}")
