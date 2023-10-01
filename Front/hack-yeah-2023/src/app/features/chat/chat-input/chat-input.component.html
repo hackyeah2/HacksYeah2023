@@ -1,5 +1,5 @@
 <div *ngIf="showQuestionTiles">
-    <app-chat-question-tiles></app-chat-question-tiles>
+    <app-chat-question-tiles (predefinedMessage)="handlePredefinedQuestion($event)" ></app-chat-question-tiles>
 </div>
 <div class="bottom-0 w-full m-2 flex flex-row justify-center items-center">
     <div class="basis-[96%]">

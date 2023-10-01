@@ -42,6 +42,11 @@ import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question
       });
     }
 
+    handlePredefinedQuestion(question: string){
+      this._message = question;
+      this.sendMessageNotification();
+    }
+
     sendMessageNotification() {
       this.showQuestionTiles = false;
       this.messageNotification.emit(this._message);
