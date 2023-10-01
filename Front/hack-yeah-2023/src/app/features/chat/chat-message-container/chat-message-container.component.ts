@@ -38,7 +38,6 @@ import { NgxSpinnerService } from "ngx-spinner";
 
       this._receiveMessageSub = this.chatCommunicationService.receivedMessage$.subscribe(msg => {
          let message = this.chatMessages[this.chatMessages.length - 1];
-         console.log(message);
          if(message) {
           message.answer = msg?.answer;
           message.chartData = msg?.chartData;

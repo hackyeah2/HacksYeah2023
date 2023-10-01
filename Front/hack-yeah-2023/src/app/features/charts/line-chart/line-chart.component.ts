@@ -15,7 +15,6 @@ export class LineChartComponent {
   createChart(){
 
 
-    console.log(this.data);
     this.chart = new Chart("MyLineChart", {
       type: 'line',
       data: {
@@ -45,7 +44,6 @@ export class LineChartComponent {
         }
       )
     }
-    console.log(datasetArray)
     this.chart.data.datasets = datasetArray;
     this.chart.update();
 
