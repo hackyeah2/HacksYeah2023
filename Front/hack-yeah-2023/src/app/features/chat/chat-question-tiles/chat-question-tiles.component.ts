@@ -9,8 +9,9 @@ import { CommonModule } from "@angular/common";
     standalone: true
 })
   export class ChatQuestionTilesComponent {
-    public question1: string = "Jak to jest być skrybą?";
-    public question2: string = "Czy mając 2zł stać mnie na mieszkanie?";
+    public category: string = "Nieruchomości";
+    public question1: string = "Jak kreują sie oplaty za mieszkanie?";
+    public question2: string = "Ile jest mieszkań w Polsce?";
     public question3: string = "Co ja tutaj robię?";
     public question4: string = "Dokąd tupta nocą jeż?"
 
