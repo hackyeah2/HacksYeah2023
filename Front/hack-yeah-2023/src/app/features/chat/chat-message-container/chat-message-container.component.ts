@@ -39,7 +39,7 @@ import { NgxSpinnerService } from "ngx-spinner";
       this._receiveMessageSub = this.chatCommunicationService.receivedMessage$.subscribe(msg => {
          let message = this.chatMessages[this.chatMessages.length - 1];
          if(message) {
-          message.answer = msg?.answer;
+          message.answer = msg?.answer + ' źródło: ' + msg?.source.name;
           message.chartData = msg?.chartData;
           message.showChart = msg?.showChart;
          }
