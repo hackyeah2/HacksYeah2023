@@ -33,7 +33,16 @@ ekonomicznej, finansowej, gospodarczej nawiązującej do wykorzystanych danych
 otwartych i pojęć z nimi związanych, zwłaszcza w zakresie mieszkalnictwa i nieruchomości,
 oraz nie wprowadza kontekstu doradczego?"""
 
-violation_error_message = "Przepraszam, ale nie mogę odpowiedzieć na to pytanie."
+violation_error_message = """Przepraszam, ale nie mogę odpowiedzieć na to pytanie.
+
+Wyłączenie odpowiedzialności
+Wszelkie informacje uzyskane za pomocą chatbota Financzeska służą jedynie celom
+informacyjnym i nie mogą być traktowane jako porada prawna w konkretnej sprawie.
+Jeżeli chcesz uzyskać wiążącą informację w indywidualnej sprawie skontaktuj się z Krajową
+Informacją Skarbową
+Ministerstwo finansów nie ponosi odpowiedzialności za żadne ze stwierdzeń zawartych
+w chatbocie Financzeska.
+"""
 
 
 def check_for_violation(question: Question) -> (bool, str):
