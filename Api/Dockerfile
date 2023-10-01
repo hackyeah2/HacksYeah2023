@@ -10,6 +10,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
-EXPOSE 80
+EXPOSE 443
 
 CMD ["gunicorn", "main:app", "--bind=0.0.0.0:443", "-k uvicorn.workers.UvicornWorker"]
