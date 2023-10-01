@@ -9,6 +9,6 @@ export class ChatService {
     constructor(private http: HttpClient) { }
 
     sendMessage(request: QuestionRequest) {
-        return this.http.post<QuestionResponse>("https://lively-river-0d27f2c03.3.azurestaticapps.net/api", request)
+        return this.http.post<QuestionResponse>("https://smartchatbot.politebeach-5edd8750.westeurope.azurecontainerapps.io", request)
     }
 }
