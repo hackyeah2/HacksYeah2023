@@ -41,7 +41,7 @@ import { NgxSpinnerService } from "ngx-spinner";
          if(message) {
           message.answer = msg?.answer + ' \n źródło: ' + msg?.source.name;
           message.chartData = msg?.chartData;
-          message.showChart = msg?.showChart;
+          message.showChart = true;
          }
 
          this.spinnerService.hide();

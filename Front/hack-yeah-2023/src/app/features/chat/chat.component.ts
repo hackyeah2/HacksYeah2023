@@ -34,7 +34,9 @@ import { QuestionResponse } from "./models/question-response";
       })
       .pipe(timeout(60000),
         catchError(() => {
-          return of(<QuestionResponse> <unknown>{
+          this.spinnerService.hide();
+          this.chatCommunicationService.setMessageTypingDisabled(false);
+          return of(<QuestionResponse>{
             answer: 'Nie udało się pobrać danych.',
             showChart: false
           })

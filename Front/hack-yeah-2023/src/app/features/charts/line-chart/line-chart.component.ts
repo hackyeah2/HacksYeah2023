@@ -15,38 +15,42 @@ export class LineChartComponent {
   createChart(){
 
 
+    console.log(this.data);
     this.chart = new Chart("MyLineChart", {
       type: 'line',
       data: {
-        labels: this.data.labels, 
-	      datasets: []
+        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
+								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+	       datasets: [
+          {
+            label: "Liczba sprzedanych mieszkań",
+            data: ['10','76', '72', '79', '92',
+								 '74', '73', '76'],
+            backgroundColor: 'blue'
+          },
+          {
+            label: "Liczba wystawionych mieszkań",
+            data: ['542', '542', '536', '327', '17',
+									 '0.00', '538', '541'],
+            backgroundColor: 'limegreen'
+          }  
+        ]
       },
       options: {
         responsive: true,
         plugins: {
           legend: {
-            position: 'bottom',
+            position: 'top',
           },
           title: {
             display: true,
-            text: this.data.title
+            text: 'Liczba mieszkań w Krakowie w zależności od dnia'
           }
         }
       }
       
+      
     });
-    let datasetArray = [];
-    for (let i =0; i<this.data.datasets.length; i++){
-      datasetArray.push(
-        {
-          label: this.data.datasets[i].label,
-          data: this.data.datasets[i].data
-        }
-      )
-    }
-    this.chart.data.datasets = datasetArray;
-    this.chart.update();
-
   }
 
   ngOnInit(){
