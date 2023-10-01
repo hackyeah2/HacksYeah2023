@@ -29,7 +29,8 @@ import { QuestionResponse } from "./models/question-response";
       this.spinnerService.show();
 
       this.chatService.sendMessage(<QuestionRequest> {
-        question: message
+        question: message,
+        sessionId: '123'
       })
       .pipe(timeout(60000),
         catchError(() => {
