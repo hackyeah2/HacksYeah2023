@@ -4,5 +4,4 @@ export interface ChatMessage {
     question: string;
     answer: string;
     chartData: Data;
-    showChart: boolean;
 }

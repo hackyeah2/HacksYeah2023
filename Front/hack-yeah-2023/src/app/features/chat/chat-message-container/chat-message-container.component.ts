@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { ChatQuestionTilesComponent } from "../chat-question-tiles/chat-question-tiles.component";
 import { NgxSpinnerService } from "ngx-spinner";
+import { ChartDataSet } from "../models/chart-dataset";
 
 @Component({
     selector: 'app-chat-message-container',
@@ -39,9 +40,13 @@ import { NgxSpinnerService } from "ngx-spinner";
       this._receiveMessageSub = this.chatCommunicationService.receivedMessage$.subscribe(msg => {
          let message = this.chatMessages[this.chatMessages.length - 1];
          if(message) {
+          const records = [];
           message.answer = msg?.answer;
-          message.chartData = msg?.chartData;
-          message.showChart = msg?.showChart;
+          let rec = 
+          records.push(<ChartDataSet> {
+             
+          })
+          message.data =
          }
 
          this.spinnerService.hide();
