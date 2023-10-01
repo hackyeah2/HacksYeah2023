@@ -11,7 +11,7 @@ import { CommonModule } from "@angular/common";
   export class ChatQuestionTilesComponent {
     public category: string = "Nieruchomości";
     public question1: string = "Jak kreują sie opłaty za mieszkanie?";
-    public question2: string = "Ile jest mieszkań w Polsce?";
+    public question2: string = "Ile średnio osób zamieszkuje w danym mieszkaniu w powiecie wrocławskim?";
     public question3: string = "Czy warto inwestować na rynku mieszkaniowym?";
     public question4: string = "What is an average floor space?"
 
