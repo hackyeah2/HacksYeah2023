@@ -1,4 +1,5 @@
 import os
+from chat.violtation import check_for_violation
 from data.assets.resource import Resource
 from data.assets.asset import AssetType
 from models.answer import Answer
@@ -11,6 +12,10 @@ from langchain.agents import create_csv_agent
 
 def answer(question: Question):
     type = AssetType.REAL_ESTATE
+
+    is_valid, violation_message = check_for_violation(question)
+    if not is_valid:
+        return Answer(violation_message, None, question.sessionId)
 
     related_resources = embedding.search(type, question.question)
     top_resource = get_top_resource(question, related_resources)
